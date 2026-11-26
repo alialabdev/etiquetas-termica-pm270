@@ -13,6 +13,18 @@ Free, no ads, no accounts, and your data never leaves your device.</p>
   <a href="README.md">Español</a>
 </p>
 
+<p align="center">
+  <img src="docs/capturas/escritorio.png" alt="The app on a PC: text, frame and label preview" width="820" />
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/capturas/movil.png" alt="The app on an Android phone" width="200" /><br><sub>On your phone</sub></td>
+    <td align="center"><img src="docs/capturas/galeria.png" alt="Gallery: crosswords, word searches and mazes" width="560" /><br><sub>Gallery: templates, frames, puzzles, colouring, QR…</sub><br><br>
+    <img src="docs/capturas/prueba.png" alt="Test label with 12 photo setting samples" width="560" /><br><sub>Test label to tune photos without wasting paper</sub></td>
+  </tr>
+</table>
+
 > **Independent project.** This app is not made, affiliated, sponsored or endorsed by Nelko. "Nelko" and "PM270" are mentioned only to say which printer it works with. It contains no logos, code or files from the official app: the printer protocol was written from scratch by testing with a printer of my own.
 >
 > The app interface is in Spanish for now. An English version is on the way.

@@ -2,7 +2,7 @@
 // Service worker: permite abrir la app instalada aunque no esté el servidor de Python.
 // Estrategia "red primero": si el servidor está encendido se usan siempre los
 // archivos nuevos (y se guardan); si no, se usa la última copia guardada.
-const CACHE = "pm270-v15";
+const CACHE = "pm270-v16";
 const SHELL = [
   "./",
   "./index.html",

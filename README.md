@@ -13,6 +13,18 @@ Gratis, sin anuncios, sin cuentas y sin enviar tus datos a ningún sitio.</p>
   <a href="README.en.md">English</a>
 </p>
 
+<p align="center">
+  <img src="docs/capturas/escritorio.png" alt="La app en el PC: texto, marco y vista previa de la etiqueta" width="820" />
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/capturas/movil.png" alt="La app en un móvil Android" width="200" /><br><sub>En el móvil</sub></td>
+    <td align="center"><img src="docs/capturas/galeria.png" alt="Galería: crucigramas, sopas de letras y laberintos" width="560" /><br><sub>Galería: plantillas, marcos, pasatiempos, colorear, QR…</sub><br><br>
+    <img src="docs/capturas/prueba.png" alt="Etiqueta de prueba con 12 muestras de ajustes de foto" width="560" /><br><sub>Etiqueta de prueba para afinar las fotos sin gastar papel</sub></td>
+  </tr>
+</table>
+
 > **Proyecto independiente.** Esta app no está hecha, afiliada, patrocinada ni respaldada por Nelko. «Nelko» y «PM270» se citan solo para indicar con qué impresora funciona. No incluye logos, código ni archivos de la app oficial: la comunicación con la impresora se ha escrito desde cero, probando con una impresora propia.
 
 ## Una persona con ideas y una IA que ayuda
