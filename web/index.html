@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<!-- Etiquetas PM270 · Copyright (C) 2026 ALIALAB · SPDX-License-Identifier: AGPL-3.0-only -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; media-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'none'" />
+  <title>Etiquetas PM270</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <meta name="theme-color" content="#efebe3" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#f3f4f6" />
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --surface: #f2f2f7;
+      --border: rgba(0, 0, 0, 0.08);
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --blue: #007aff;
+      --green: #34c759;
+      --green-dark: #248a3d;
+      --red: #ff3b30;
+      --radius: 18px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.045);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+      margin: 0;
+      padding: 0 1rem 2.5rem;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 20;
+      margin: 0.9rem auto 1.25rem;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+      padding: 0.75rem 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .status-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.38rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      background: var(--surface);
+      color: var(--text);
+    }
+    .pill.ok { background: #e8f8ed; color: var(--green-dark); }
+    .pill.off { background: #ffeceb; color: #c92a22; }
+    .pill.warn { background: #fff4e5; color: #b25e00; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.15rem;
+      align-items: start;
+    }
+    @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+      margin-bottom: 1.1rem;
+    }
+
+    h2 {
+      margin: 0 0 0.85rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+    .row:last-child { margin-bottom: 0; }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 0.58rem 0.9rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.08s ease, filter 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+    button:active:not(:disabled) { transform: scale(0.97); }
+    button:hover:not(:disabled) { filter: brightness(0.96); }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .btn-blue { background: var(--blue); color: #fff; }
+    .btn-red { background: #ffeceb; color: var(--red); }
+    .btn-soft { background: var(--surface); color: var(--text); }
+
+    .btn-print-big {
+      width: 100%;
+      padding: 0.95rem 1.2rem;
+      font-size: 1.12rem;
+      border-radius: 16px;
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(52, 199, 89, 0.28);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 0.92rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: var(--surface);
+      color: var(--text);
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue);
+      background: #fff;
+    }
+    textarea {
+      width: 100%;
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    input[type="range"] {
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+
+    .val-fixed {
+      display: inline-block;
+      min-width: 42px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .sticker-desk {
+      background: #e9e9ee;
+      border-radius: 16px;
+      padding: 1.4rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: auto;
+      max-height: 460px;
+    }
+
+    .canvas-stage {
+      position: relative;
+      display: inline-block;
+      line-height: 0;
+      border-radius: 10px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+      background: #fff;
+      padding: 6px;
+    }
+
+    #previewCanvas {
+      background: #ffffff;
+      border-radius: 6px;
+      image-rendering: pixelated;
+      max-width: 100%;
+      height: auto;
+      touch-action: none;
+      display: block;
+    }
+
+    #overlayCanvas {
+      position: absolute;
+      inset: 6px;
+      width: calc(100% - 12px);
+      height: calc(100% - 12px);
+      pointer-events: none;
+    }
+
+    .hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0.65rem 0 0;
+      text-align: center;
+    }
+
+    details.card { padding: 0.9rem 1.2rem; }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--muted);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details[open] summary {
+      margin-bottom: 0.9rem;
+      color: var(--text);
+    }
+
+    pre {
+      background: #f5f5f7;
+      color: #1d1d1f;
+      border: 1px solid var(--border);
+      padding: 0.85rem;
+      border-radius: 12px;
+      max-height: 220px;
+      overflow: auto;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      margin: 0.6rem 0 0;
+    }
+
+    progress {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      margin-top: 0.65rem;
+      accent-color: var(--green);
+    }
+
+    .toasts {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: min(380px, calc(100vw - 2rem));
+    }
+    .toast {
+      padding: 0.75rem 1rem;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      background: #1d1d1f;
+      color: #fff;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+      cursor: pointer;
+      animation: toast-in 0.18s ease-out;
+    }
+    .toast.ok { background: var(--green-dark); }
+    .toast.warn { background: #b25e00; }
+    .toast.error { background: #c92a22; }
+    @keyframes toast-in {
+      from { transform: translateY(8px); opacity: 0; }
+      to { transform: none; opacity: 1; }
+    }
+
+    .paper-use {
+      margin: 0 0 0.6rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+    details.buy {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 0.6rem 0.8rem;
+    }
+    details.buy summary {
+      font-size: 0.9rem;
+      color: var(--blue);
+    }
+    details.buy[open] summary { margin-bottom: 0.5rem; }
+    .buy-body {
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+    .buy-body p { margin: 0.4rem 0; }
+    .buy-body ul { margin: 0.3rem 0 0.6rem; padding-left: 1.1rem; }
+    .buy-body li { margin: 0.2rem 0; }
+    .buy-tip { opacity: 0.55; }
+    .buy-tip.active { opacity: 1; }
+    .buy-note { color: var(--muted); }
+    .list-help {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .list-help code {
+      background: var(--surface);
+      padding: 0 0.3rem;
+      border-radius: 5px;
+    }
+    .brand-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+    }
+    button[hidden] { display: none; }
+    .paper-dialog {
+      border: none;
+      border-radius: 18px;
+      padding: 1.2rem 1.3rem;
+      max-width: min(440px, calc(100vw - 2rem));
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      color: var(--text);
+    }
+    .paper-dialog::backdrop { background: rgba(0, 0, 0, 0.35); }
+    .paper-dialog h3 { margin: 0 0 0.6rem; }
+    .dialog-warn {
+      background: #fff4e5;
+      color: #b25e00;
+      padding: 0.6rem 0.8rem;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    /* --- Distribución en una sola pantalla (escritorio) --- */
+    .app {
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+    .topbar {
+      top: 0.5rem;
+      margin: 0.6rem auto 0.8rem;
+      padding: 0.55rem 0.9rem;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(340px, 390px) minmax(0, 1fr) minmax(230px, 270px);
+      gap: 0.9rem;
+      align-items: stretch;
+    }
+    .col { min-width: 0; display: flex; flex-direction: column; }
+    .col .card { margin-bottom: 0.7rem; padding: 0.8rem 0.9rem; }
+    .col button { padding: 0.45rem 0.7rem; font-size: 0.86rem; border-radius: 10px; }
+    .col .btn-print-big { padding: 0.9rem 1rem; font-size: 1.08rem; border-radius: 14px; }
+    .col .row { gap: 0.4rem; }
+    .col label { font-size: 0.85rem; }
+    .col .card:last-child { margin-bottom: 0; }
+    .card h2 { margin-bottom: 0.6rem; font-size: 1rem; }
+    .row { margin-bottom: 0.55rem; }
+    textarea { min-height: 58px; height: 70px; margin-bottom: 0.5rem; }
+    .preview-card { flex: 1; display: flex; flex-direction: column; }
+    .preview-card .sticker-desk { flex: 1; max-height: none; min-height: 220px; }
+    .meta { font-weight: 500; color: var(--muted); font-size: 0.85rem; margin-left: auto; }
+    .full { width: 100%; }
+    .icon-btn { padding: 0.58rem 0.65rem; }
+    .paper-use { margin: 0.5rem 0 0.6rem; }
+    #previewCanvas { max-width: none; }
+
+    @media (min-width: 1100px) and (min-height: 600px) {
+      body { height: 100vh; overflow: hidden; padding-bottom: 0; }
+      .app { height: 100vh; display: flex; flex-direction: column; }
+      .layout { flex: 1; min-height: 0; padding-bottom: 0.8rem; }
+      .col { min-height: 0; overflow-y: auto; }
+      .col-preview { overflow: hidden; }
+      .preview-card { min-height: 0; }
+      .preview-card .sticker-desk { min-height: 0; }
+    }
+    @media (max-width: 1099px) {
+      .layout { grid-template-columns: 1fr; }
+      .col-preview { order: -1; }
+    }
+
+    .panel-dialog {
+      border: none;
+      border-radius: 18px;
+      padding: 1rem 1.2rem 1.2rem;
+      width: min(760px, calc(100vw - 2rem));
+      max-height: calc(100vh - 2rem);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      color: var(--text);
+    }
+    .panel-dialog::backdrop { background: rgba(0, 0, 0, 0.35); }
+    .dialog-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.7rem;
+    }
+    .dialog-head h3 { margin: 0; }
+    .dialog-close { padding: 0.4rem 0.7rem; }
+    .paper-row { display: flex; gap: 0.4rem; }
+    .frame-chip { margin-left: auto; display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; font-weight: normal; color: var(--muted, #666); }
+    .frame-chip button { padding: 0.1rem 0.45rem; font-size: 0.8rem; }
+    .gallery { width: min(1100px, calc(100vw - 2rem)); height: calc(100vh - 2rem); }
+    .gallery[open] { display: flex; flex-direction: column; }
+    .gal-tabs { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.6rem; }
+    .gal-tabs button.active { background: #2563eb; color: #fff; }
+    .gal-options { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin-bottom: 0.6rem; min-height: 2rem; }
+    .gal-options .list-help { margin: 0; flex-basis: 100%; }
+    .gal-field { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .gal-tiles { flex: 1; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 0.7rem; align-content: start; padding: 2px; }
+    .gal-tile { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; padding: 0.5rem; border: 1px solid #ddd; border-radius: 12px; background: #fafafa; cursor: pointer; }
+    .gal-tile:hover, .gal-tile:focus { border-color: #2563eb; outline: none; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25); }
+    .gal-tile canvas, .gal-tile img { width: 100%; height: 150px; object-fit: contain; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+    .gal-tile span { font-size: 0.82rem; text-align: center; }
+    .gal-tile.disabled { cursor: default; opacity: 0.6; }
+    .gal-err { font-size: 0.8rem; color: #b91c1c; }
+    .gal-del { position: absolute; top: 4px; right: 4px; padding: 0.1rem 0.4rem; font-size: 0.75rem; background: #fff; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; }
+    .paper-row select { flex: 1; min-width: 0; }
+    .fav-btn { font-size: 1.1rem; padding: 0.3rem 0.65rem; color: #b25e00; }
+    .fav-btn.fav-on { background: #fff4e5; }
+    .only-favs { margin-top: 0.45rem; font-size: 0.8rem; }
+
+    /* =========================================================
+       Tema sobrio: grises neutros, un solo color de acento,
+       iconos de línea en vez de emojis.
+       ========================================================= */
+    :root {
+      --bg: #f3f4f6;
+      --card: #ffffff;
+      --surface: #f3f4f6;
+      --surface-2: #e9ebef;
+      --border: #e3e5e9;
+      --border-strong: #d4d7dd;
+      --text: #1f2328;
+      --muted: #687080;
+      --blue: #2463eb;
+      --blue-dark: #1d4fc4;
+      --blue-soft: #eaf0fe;
+      --green: #1f9d55;
+      --green-dark: #17804a;
+      --red: #d93025;
+      --radius: 12px;
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
+    }
+    body {
+      font-family: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg);
+      font-size: 14px;
+    }
+    .topbar {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      border-color: var(--border);
+    }
+    .brand { font-size: 1.05rem; font-weight: 650; letter-spacing: -0.01em; }
+    .brand-logo { width: 28px; height: 28px; border-radius: 7px; }
+    .topbar .status-group { gap: 0.4rem; }
+    .tb-sep { width: 1px; height: 22px; background: var(--border-strong); margin: 0 0.2rem; }
+
+    .card {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border-color: var(--border);
+    }
+    .card h2, h2 { font-size: 0.95rem; font-weight: 650; letter-spacing: -0.005em; gap: 0.5rem; }
+    h2.i::before { color: var(--blue); width: 18px; height: 18px; }
+
+    /* Botones */
+    button { border-radius: 8px; font-weight: 550; gap: 0.4rem; transition: background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease; }
+    button:hover:not(:disabled) { filter: none; }
+    button:active:not(:disabled) { transform: translateY(1px); }
+    .btn-soft { background: #fff; color: var(--text); border: 1px solid var(--border-strong); }
+    .btn-soft:hover:not(:disabled) { background: var(--surface); }
+    .btn-blue { background: var(--blue); color: #fff; border: 1px solid var(--blue); }
+    .btn-blue:hover:not(:disabled) { background: var(--blue-dark); }
+    .btn-red { background: #fff; color: var(--red); border: 1px solid #f1c4c0; }
+    .btn-red:hover:not(:disabled) { background: #fdf1f0; }
+    .btn-red:disabled { color: var(--muted); border-color: var(--border); }
+    .col button { border-radius: 8px; }
+    .icon-btn { padding: 0.45rem 0.55rem; }
+    .col .icon-btn { padding: 0.45rem 0.55rem; }
+    .btn-print-big, .col .btn-print-big {
+      background: var(--blue);
+      border: 1px solid var(--blue);
+      border-radius: 10px;
+      box-shadow: 0 1px 2px rgba(36, 99, 235, 0.25);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.8rem 1rem;
+    }
+    .btn-print-big:hover:not(:disabled) { background: var(--blue-dark); }
+    .btn-print-big:disabled { background: #9db6f2; border-color: #9db6f2; opacity: 1; }
+
+    /* Iconos (máscara SVG: toman el color del texto) */
+    .i::before {
+      content: "";
+      display: inline-block;
+      flex: none;
+      width: 16px;
+      height: 16px;
+      background: currentColor;
+      -webkit-mask: var(--ic) center / contain no-repeat;
+      mask: var(--ic) center / contain no-repeat;
+    }
+    label.i::before { color: var(--muted); }
+    .fav-btn.i::before { width: 17px; height: 17px; }
+    .fav-btn { color: var(--muted); }
+    .fav-btn.fav-on { background: #fff8e6; border-color: #f0d48a; color: #b7791f; }
+    .fav-btn.fav-on { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22black%22 stroke=%22black%22 stroke-width=%222%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2L7 14.2 2 9.3l6.9-1z%22/%3E%3C/svg%3E"); }
+
+    /* Indicadores de la barra superior */
+    .pill { font-weight: 550; font-size: 0.82rem; padding: 0.34rem 0.75rem; background: var(--surface); border: 1px solid var(--border); }
+    .pill.ok { background: #ecf7f0; color: var(--green-dark); border-color: #cfe9d9; }
+    .pill.off { background: var(--surface); color: var(--muted); }
+    .pill.warn { background: #fff6e5; color: #a15c00; border-color: #f3dcae; }
+    #statusPill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #a3a9b4; }
+    #statusPill.ok::before { background: #22a35a; box-shadow: 0 0 0 3px rgba(34, 163, 90, 0.18); }
+
+    /* Campos */
+    input[type="text"], input[type="number"], select, textarea {
+      border-radius: 8px;
+      border-color: var(--border-strong);
+      background: #fff;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(36, 99, 235, 0.15); }
+    label { color: var(--text); font-weight: 500; }
+    input[type="checkbox"] { accent-color: var(--blue); width: 15px; height: 15px; }
+
+    /* Vista previa */
+    .sticker-desk {
+      background-color: #eef0f3;
+      background-image: radial-gradient(#d9dce2 1px, transparent 1px);
+      background-size: 16px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .canvas-stage { border-radius: 6px; box-shadow: 0 6px 18px rgba(16, 24, 40, 0.12); padding: 4px; }
+    #overlayCanvas { inset: 4px; width: calc(100% - 8px); height: calc(100% - 8px); }
+    .meta { font-variant-numeric: tabular-nums; }
+    .sticker-desk.continuous { align-items: flex-start; overflow-y: auto; }
+    .gal-card { padding: 0.5rem !important; }
+    .gal-open { justify-content: flex-start; gap: 0.7rem; padding: 0.5rem 0.6rem !important; border-color: var(--border); text-align: left; white-space: normal; }
+    .gal-open-ic { width: 34px; height: 34px; border-radius: 8px; background: var(--blue-soft); color: var(--blue); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+    .gal-open-ic::before { width: 18px; height: 18px; }
+    .gal-open-txt { display: flex; flex-direction: column; line-height: 1.25; }
+    .gal-open-txt strong { font-size: 0.9rem; }
+    .gal-open-txt small { font-size: 0.76rem; color: var(--muted); font-weight: 400; }
+    @media (max-height: 680px) {
+      textarea { height: 56px; min-height: 48px; }
+      .gal-open-ic { width: 28px; height: 28px; }
+      .gal-open-txt small { display: none; }
+    }
+
+    .toast { border-radius: 10px; font-weight: 550; background: #1f2328; }
+    .panel-dialog, .paper-dialog { border-radius: 14px; box-shadow: 0 20px 48px rgba(16, 24, 40, 0.22); }
+    .dialog-head h3, .paper-dialog h3 { font-size: 1.05rem; font-weight: 650; }
+    .dialog-close { border: none !important; background: transparent !important; }
+    .dialog-close:hover { background: var(--surface) !important; }
+    pre { background: #f8f9fb; }
+
+    /* Galería */
+    .gal-tabs { gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0.8rem; }
+    .gal-tabs button { background: none; border: none; border-bottom: 2px solid transparent; border-radius: 0; color: var(--muted); padding: 0.55rem 0.9rem; }
+    .gal-tabs button:hover:not(:disabled) { background: none; color: var(--text); }
+    .gal-tabs button.active { background: none; color: var(--blue); border-bottom-color: var(--blue); }
+    .gal-tile { background: #fff; border-color: var(--border); border-radius: 10px; }
+    .gal-tile:hover, .gal-tile:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(36, 99, 235, 0.15); }
+    .gal-tile canvas, .gal-tile img { box-shadow: none; border: 1px solid var(--border); }
+    .gal-del { border-radius: 6px; }
+    .i-gear { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%223%22/%3E%3Cpath d=%22M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z%22/%3E%3C/svg%3E"); }
+    .i-log { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M4 6h16M4 12h16M4 18h10%22/%3E%3C/svg%3E"); }
+    .i-grid { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%223%22 y=%223%22 width=%227%22 height=%227%22 rx=%221%22/%3E%3Crect x=%2214%22 y=%223%22 width=%227%22 height=%227%22 rx=%221%22/%3E%3Crect x=%223%22 y=%2214%22 width=%227%22 height=%227%22 rx=%221%22/%3E%3Crect x=%2214%22 y=%2214%22 width=%227%22 height=%227%22 rx=%221%22/%3E%3C/svg%3E"); }
+    .i-download { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 3v12M7 10l5 5 5-5M5 21h14%22/%3E%3C/svg%3E"); }
+    .i-printer { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M6 9V3h12v6%22/%3E%3Crect x=%223%22 y=%229%22 width=%2218%22 height=%228%22 rx=%222%22/%3E%3Cpath d=%22M6 14h12v7H6z%22/%3E%3C/svg%3E"); }
+    .i-unplug { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M18.4 5.6 5.6 18.4%22/%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%229%22/%3E%3C/svg%3E"); }
+    .i-type { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M4 7V4h16v3M9 20h6M12 4v16%22/%3E%3C/svg%3E"); }
+    .i-image { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%223%22 y=%223%22 width=%2218%22 height=%2218%22 rx=%222%22/%3E%3Ccircle cx=%229%22 cy=%229%22 r=%222%22/%3E%3Cpath d=%22m21 15-5-5L5 21%22/%3E%3C/svg%3E"); }
+    .i-eye { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z%22/%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%223%22/%3E%3C/svg%3E"); }
+    .i-roll { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M4 4h12a4 4 0 0 1 0 8H8%22/%3E%3Ccircle cx=%2216%22 cy=%228%22 r=%221%22/%3E%3Cpath d=%22M4 4v16h12v-8%22/%3E%3C/svg%3E"); }
+    .i-rotate { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M21 12a9 9 0 1 1-3-6.7L21 8%22/%3E%3Cpath d=%22M21 3v5h-5%22/%3E%3C/svg%3E"); }
+    .i-target { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%229%22/%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%223%22/%3E%3Cpath d=%22M12 1v4M12 19v4M1 12h4M19 12h4%22/%3E%3C/svg%3E"); }
+    .i-calendar { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%223%22 y=%224%22 width=%2218%22 height=%2217%22 rx=%222%22/%3E%3Cpath d=%22M3 10h18M8 2v4M16 2v4%22/%3E%3C/svg%3E"); }
+    .i-trash { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15%22/%3E%3C/svg%3E"); }
+    .i-list { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m3 6 2 2 3-3M3 13l2 2 3-3M11 7h10M11 14h10M11 20h10%22/%3E%3C/svg%3E"); }
+    .i-cart { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%229%22 cy=%2220%22 r=%221.5%22/%3E%3Ccircle cx=%2218%22 cy=%2220%22 r=%221.5%22/%3E%3Cpath d=%22M2 3h3l2.7 12.4a1.5 1.5 0 0 0 1.5 1.1h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6%22/%3E%3C/svg%3E"); }
+    .i-upload { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 16V4M7 9l5-5 5 5M4 20h16%22/%3E%3C/svg%3E"); }
+    .i-star { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.2-6.2 3.2L7 14.2 2 9.3l6.9-1z%22/%3E%3C/svg%3E"); }
+    .i-rocket { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z%22/%3E%3Cpath d=%22M12 15l-3-3a22 22 0 0 1 2-4A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2z%22/%3E%3Cpath d=%22M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5%22/%3E%3C/svg%3E"); }
+    .i-smile { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%229%22/%3E%3Cpath d=%22M8 14s1.5 2 4 2 4-2 4-2%22/%3E%3Cpath d=%22M9 9h.01M15 9h.01%22/%3E%3C/svg%3E"); }
+    .i-zoom { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2211%22 cy=%2211%22 r=%227%22/%3E%3Cpath d=%22m21 21-4.3-4.3M11 8v6M8 11h6%22/%3E%3C/svg%3E"); }
+    .i-wand { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m15 4 5 5L9 20l-5-5z%22/%3E%3Cpath d=%22m12 7 5 5M5 3v4M3 5h4M19 15v4M17 17h4%22/%3E%3C/svg%3E"); }
+    .i-battery { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%222%22 y=%227%22 width=%2217%22 height=%2210%22 rx=%222%22/%3E%3Cpath d=%22M22 11v2M6 11v2%22/%3E%3C/svg%3E"); }
+    .i-bolt { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M13 2 4 14h7l-1 8 9-12h-7z%22/%3E%3C/svg%3E"); }
+    .i-tag { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z%22/%3E%3Ccircle cx=%227.5%22 cy=%227.5%22 r=%221.2%22/%3E%3C/svg%3E"); }
+    .i-x { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M18 6 6 18M6 6l12 12%22/%3E%3C/svg%3E"); }
+    .i-search { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2211%22 cy=%2211%22 r=%227%22/%3E%3Cpath d=%22m21 21-4.3-4.3%22/%3E%3C/svg%3E"); }
+    .i-stop { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%226%22 y=%226%22 width=%2212%22 height=%2212%22 rx=%221.5%22/%3E%3C/svg%3E"); }
+    .i-sparkles { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z%22/%3E%3Cpath d=%22M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z%22/%3E%3C/svg%3E"); }
+    .i-plug { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M9 2v6M15 2v6M6 8h12v3a6 6 0 0 1-12 0zM12 17v5%22/%3E%3C/svg%3E"); }
+    .i-mural { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%223%22 y=%224%22 width=%2218%22 height=%2216%22 rx=%222%22/%3E%3Cpath d=%22M9 4v16M15 4v16%22/%3E%3Cpath d=%22m3 16 4-4 3 3 4-5 7 7%22/%3E%3C/svg%3E"); }
+    .seg { display: grid; grid-template-columns: 1fr 1fr; padding: 3px; gap: 3px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.7rem; }
+    .seg button, .col .seg button { background: transparent; border: none; color: var(--muted); padding: 0.4rem 0.5rem; border-radius: 7px; }
+    .seg button.active { background: var(--card); color: var(--text); box-shadow: 0 1px 2px rgba(16, 24, 40, 0.12); }
+    .mural-pane .row { margin-bottom: 0.45rem; align-items: center; }
+    .mural-pane input[type="number"] { width: 50px; padding-left: 0.4rem; padding-right: 0.2rem; }
+    .mural-pane .row label { gap: 0.3rem; }
+    .mural-empty[hidden], #muralStripWrap[hidden] { display: none; }
+    .mural-pane .row { flex-wrap: nowrap; }
+    .mural-pane select { width: 100%; margin-bottom: 0.45rem; }
+    .mural-total { font-size: 0.82rem; margin: 0 0 0.5rem; color: var(--muted); }
+    .mural-total strong { color: var(--text); font-variant-numeric: tabular-nums; }
+    .mural-warn { font-size: 0.78rem; color: #a15c00; margin: 0 0 0.5rem; }
+    .link-btn, .col .link-btn { background: none; border: none; padding: 0; color: var(--blue); font: inherit; font-weight: 550; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+    .mural-steps { margin: 0; padding-left: 1.2rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.35rem; max-width: 460px; }
+    #muralGuide { display: none; cursor: pointer; box-shadow: 0 6px 18px rgba(16, 24, 40, 0.12); background: #fff; }
+    .sticker-desk.mural-on .canvas-stage { display: none; }
+    .sticker-desk.mural-on #muralGuide { display: block; }
+    .mural-empty { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; color: var(--muted); pointer-events: none; }
+    .sticker-desk { position: relative; }
+    .perline-row { justify-content: space-between; flex-wrap: nowrap; }
+    .perline-nav { display: inline-flex; align-items: center; gap: 0.3rem; }
+    .perline-nav[hidden] { display: none; }
+    .perline-nav .icon-btn, .col .perline-nav .icon-btn { padding: 0.15rem 0.5rem; font-size: 1rem; line-height: 1; }
+    .perline-nav .meta { margin: 0; font-size: 0.78rem; white-space: nowrap; }
+    .i-layers { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 3 2 8l10 5 10-5-10-5zM2 16l10 5 10-5M2 12l10 5 10-5%22/%3E%3C/svg%3E"); }
+    .i-plus { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 5v14M5 12h14%22/%3E%3C/svg%3E"); }
+    .i-grip { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M4 7h16M4 12h16M4 17h16%22/%3E%3C/svg%3E"); }
+    .preview-card { position: relative; }
+    .layers-btn { font-size: 0.78rem; padding: 0.2rem 0.5rem; margin-left: 0.25rem; }
+    .layers-btn::before { width: 14px !important; height: 14px !important; }
+    .layers-btn[hidden] { display: none; }
+    .layers-pop { position: absolute; z-index: 20; right: 0.8rem; top: 3rem; width: min(300px, calc(100% - 1.6rem)); max-height: 60%; overflow: auto; background: var(--card); border: 1.5px solid var(--ink, #222); border-radius: 6px; box-shadow: 0 12px 30px rgba(0,0,0,0.18); padding: 0.4rem; font-size: 0.85rem; }
+    #previewCanvas.with-margin { outline: 1.5px dashed var(--blue); outline-offset: 0; }
+    .elist:empty { display: none; }
+    .elist { margin-top: 0.4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; font-size: 0.8rem; font-family: var(--mono); }
+    .elist .layer-row { padding: 0 0.15rem; border: 1.5px dashed var(--faint); gap: 0.25rem; }
+    .elist .layer-row .grip { width: 14px; }
+    .col .elist .icon-btn { padding: 0.1rem 0.25rem; }
+    .elist-in { display: contents; }
+    .gal-elist:not(:has(.layer-row:not([hidden]))) { display: none; }
+    .elist .layer-row[hidden] { display: none; }
+    @media (max-height: 680px) {
+      .col-tools .card:has(#textList .layer-row) textarea { height: 34px; min-height: 30px; }
+      .elist { margin-top: 0.25rem; }
+      .col-tools:has(.elist .layer-row) .card { padding-top: 0.4rem; padding-bottom: 0.45rem; margin-bottom: 0.35rem; }
+      .col-tools:has(.elist .layer-row) .card h2 { margin-bottom: 0.3rem; }
+      .col-tools:has(.elist .layer-row) .gal-open { padding: 0.25rem 0.5rem !important; }
+      .col-tools:has(.elist .layer-row) .gal-open-ic { width: 24px; height: 24px; }
+    }
+    .elist .layer-row.sel { border-style: solid; border-color: var(--blue); }
+    .gal-card .chip { margin-top: 3px; }
+    .elist .lp-note { font-family: inherit; font-size: 0.72rem; color: var(--muted); padding: 0 0.2rem; }
+    .layers-pop[hidden] { display: none; }
+    .layers-pop .lp-head { font-size: 0.72rem; color: var(--muted); padding: 0.15rem 0.3rem 0.35rem; }
+    .layer-row { display: flex; align-items: center; gap: 0.35rem; padding: 0.25rem 0.25rem; border-radius: 4px; cursor: pointer; border: 1.5px solid transparent; }
+    .layer-row:hover { background: var(--field, #f3f3f3); }
+    .layer-row.sel { border-color: var(--blue); }
+    .layer-row.drop-before { box-shadow: inset 0 2px 0 var(--blue); }
+    .layer-row.drop-after { box-shadow: inset 0 -2px 0 var(--blue); }
+    .layer-row.dragging { opacity: 0.4; }
+    .layer-row .grip { cursor: grab; width: 18px; height: 18px; flex: none; }
+    .layer-row .grip::before { content: ""; display: block; width: 16px; height: 16px; background: currentColor; -webkit-mask: var(--ic) center / contain no-repeat; mask: var(--ic) center / contain no-repeat; opacity: 0.6; }
+    .layer-row .grip.none::before { visibility: hidden; }
+    .layer-row .kind { flex: none; font-size: 0.68rem; font-family: var(--mono); color: var(--muted); width: 3.3rem; }
+    .layer-row .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .layer-row .icon-btn { padding: 0.15rem 0.3rem; box-shadow: none; }
+    .layer-row .icon-btn::before { width: 13px; height: 13px; }
+    .layers-pop .lp-empty { color: var(--muted); padding: 0.4rem; }
+    .hist-btns { display: inline-flex; gap: 0.25rem; margin-left: 0.6rem; }
+    .hist-btns .icon-btn { padding: 0.25rem 0.4rem; }
+    .hist-btns .icon-btn::before { width: 15px; height: 15px; }
+    .i-undo { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M9 14 4 9l5-5%22/%3E%3Cpath d=%22M4 9h10.5a5.5 5.5 0 0 1 0 11H11%22/%3E%3C/svg%3E"); }
+    .i-redo { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m15 14 5-5-5-5%22/%3E%3Cpath d=%22M20 9H9.5a5.5 5.5 0 0 0 0 11H13%22/%3E%3C/svg%3E"); }
+    /* =========================================================
+       Estilo «Ticket»: papel crudo, tinta negra, títulos de máquina,
+       bordes marcados con sombra dura y un solo acento verde azulado.
+       Modo oscuro: mismos tokens con otros valores.
+       ========================================================= */
+    :root {
+      --bg: #efebe3; --card: #fbf9f4; --surface: #f3efe6; --surface-2: #e8e3d8;
+      --ink: #1b1b1b; --on-ink: #ffffff; --field: #ffffff;
+      --border: var(--ink); --border-strong: var(--ink); --text: #1b1b1b; --muted: #5d5a53;
+      --blue: #0f766e; --blue-dark: #0b5d56; --blue-soft: #d7efe9;
+      --red: #b42318; --dot: rgba(0, 0, 0, 0.045); --desk-dot: #cfc9bd; --faint: #a9a49a;
+      --mono: "Cascadia Mono", "JetBrains Mono", Consolas, ui-monospace, monospace;
+      --hard: 3px 3px 0 var(--ink);
+      color-scheme: light;
+    }
+    :root[data-theme="dark"] {
+      --bg: #141413; --card: #1f1e1c; --surface: #292825; --surface-2: #34332f;
+      --ink: #e9e4d8; --on-ink: #141413; --field: #181816;
+      --text: #eeeae0; --muted: #a8a397;
+      --blue: #3fb8a8; --blue-dark: #66cdbf; --blue-soft: #173a36;
+      --red: #ff8a7a; --dot: rgba(255, 255, 255, 0.035); --desk-dot: #3a3935; --faint: #5f5c55;
+      --hard: 3px 3px 0 #000;
+      color-scheme: dark;
+    }
+    body { background: var(--bg); color: var(--text); background-image: radial-gradient(var(--dot) 1px, transparent 1px); background-size: 5px 5px; }
+    .topbar { background: var(--card); border: 1.5px solid var(--border); border-radius: 6px; box-shadow: var(--hard); }
+    .brand { font-family: var(--mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
+    .brand-logo { border-radius: 4px; border: 1.5px solid var(--border); }
+    .card { background: var(--card); border: 1.5px solid var(--border); border-radius: 6px; box-shadow: var(--hard); color: var(--text); }
+    .card h2, h2 { font-family: var(--mono); text-transform: uppercase; font-size: 0.82rem; letter-spacing: 0.06em; font-weight: 700; }
+    h2.i::before { color: var(--text); }
+    .meta, #frameInfo { font-family: var(--mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+    label { color: var(--text); }
+    button { border-radius: 4px; }
+    .btn-soft { background: var(--card); color: var(--text); border: 1.5px solid var(--border); box-shadow: 2px 2px 0 var(--ink); }
+    .btn-soft:hover:not(:disabled) { background: var(--surface-2); }
+    .btn-soft:disabled { box-shadow: none; border-color: var(--faint); color: var(--faint); opacity: 1; }
+    .btn-blue, .btn-print-big, .col .btn-print-big { background: var(--ink); border: 1.5px solid var(--ink); color: var(--on-ink); box-shadow: 3px 3px 0 var(--blue); border-radius: 4px; }
+    .btn-blue:hover:not(:disabled), .btn-print-big:hover:not(:disabled) { background: var(--ink); filter: brightness(0.85); }
+    .btn-print-big, .col .btn-print-big { font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.95rem; }
+    .btn-print-big:disabled, .btn-blue:disabled { background: var(--surface-2); border-color: var(--faint); box-shadow: none; color: var(--muted); }
+    .btn-red { background: var(--card); border: 1.5px solid var(--border); box-shadow: 2px 2px 0 var(--ink); color: var(--red); }
+    .btn-red:hover:not(:disabled) { background: var(--surface-2); }
+    .btn-red:disabled { box-shadow: none; border-color: var(--faint); color: var(--faint); }
+    button:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: none; }
+    .dialog-close, .dialog-close:hover { box-shadow: none !important; }
+    .pill { font-family: var(--mono); text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.04em; background: var(--card); color: var(--text); border: 1.5px solid var(--border); border-radius: 4px; }
+    .pill.off { background: var(--card); color: var(--muted); }
+    .pill.ok { background: var(--blue-soft); color: var(--blue-dark); border-color: var(--border); }
+    .pill.warn { border-color: var(--border); }
+    #statusPill.ok::before { background: var(--blue); box-shadow: none; }
+    input[type="text"], input[type="number"], select, textarea { background: var(--field); color: var(--text); border: 1.5px solid var(--border); border-radius: 4px; }
+    input:focus, select:focus, textarea:focus { background: var(--field); border-color: var(--blue); box-shadow: 2px 2px 0 var(--blue); }
+    textarea { font-family: var(--mono); }
+    input[type="checkbox"], input[type="range"] { accent-color: var(--blue); }
+    .sticker-desk { background-color: var(--surface); border: 1.5px dashed var(--faint); border-radius: 4px; background-image: radial-gradient(var(--desk-dot) 1px, transparent 1px); }
+    .canvas-stage { background: #ffffff; box-shadow: 4px 4px 0 var(--ink); border-radius: 0; }
+    #muralGuide { box-shadow: 4px 4px 0 var(--ink); }
+    .seg { background: var(--surface); border: 1.5px solid var(--border); border-radius: 4px; }
+    .seg button, .col .seg button { font-family: var(--mono); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.05em; box-shadow: none; border-radius: 2px; color: var(--muted); }
+    .seg button.active { background: var(--ink); color: var(--on-ink); box-shadow: none; }
+    .gal-open { border-color: var(--border); }
+    .gal-open-ic { background: var(--blue-soft); color: var(--blue); border: 1.5px solid var(--border); border-radius: 4px; }
+    .gal-open-txt strong { font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.82rem; }
+    .gal-open-txt small, .hint, .paper-use, .list-help, .buy-note { color: var(--muted); }
+    .tb-sep { background: var(--border); }
+    .link-btn, .col .link-btn { box-shadow: none; color: var(--blue); }
+    .fav-btn.fav-on { background: var(--blue-soft); border-color: var(--border); color: var(--blue); }
+    dialog, .panel-dialog, .paper-dialog { background: var(--card); color: var(--text); border: 1.5px solid var(--border); border-radius: 6px; box-shadow: 6px 6px 0 var(--ink); }
+    .dialog-head h3, .paper-dialog h3 { font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.95rem; }
+    pre { background: var(--field); color: var(--text); border: 1.5px solid var(--border); border-radius: 4px; }
+    .gal-tabs { border-bottom-color: var(--border); }
+    .gal-tabs button { font-family: var(--mono); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.04em; box-shadow: none; }
+    .gal-tabs button.active { color: var(--blue); border-bottom-color: var(--blue); }
+    .gal-tile { background: var(--card); border: 1.5px solid var(--border); border-radius: 4px; box-shadow: 2px 2px 0 var(--ink); color: var(--text); }
+    .gal-tile:hover, .gal-tile:focus { border-color: var(--blue); box-shadow: 2px 2px 0 var(--blue); }
+    .gal-tile canvas, .gal-tile img { background: #ffffff; border: 1px solid var(--faint); box-shadow: none; }
+    .gal-del { background: var(--card); color: var(--text); border-color: var(--border); }
+    .toast { background: var(--ink); color: var(--on-ink); border-radius: 4px; box-shadow: 3px 3px 0 var(--blue); font-family: var(--mono); font-size: 0.82rem; }
+    .toast.ok { background: var(--blue); color: #fff; box-shadow: 3px 3px 0 var(--ink); }
+    .mural-warn, .dialog-warn { border-radius: 4px; }
+    .buy-tip { background: var(--surface); }
+    .buy-body a { color: var(--blue); }
+    .col .card { margin-bottom: 0.5rem; padding: 0.65rem 0.85rem; }
+    .mural-pane .row { margin-bottom: 0.35rem; }
+    .col { padding: 0 4px 2px 0; }
+    .topbar { margin-bottom: 0.7rem; margin-left: 0; margin-right: 0; align-self: stretch; }
+    .i-moon { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z%22/%3E%3C/svg%3E"); }
+    .i-sun { --ic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%224%22/%3E%3Cpath d=%22M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4%22/%3E%3C/svg%3E"); }
+    .tune { flex-wrap: nowrap; gap: 0.6rem; }
+    .tune label { display: inline-flex; align-items: center; gap: 0.35rem; min-width: 0; flex: 1; white-space: nowrap; }
+    .tune input[type="range"] { flex: 1; min-width: 50px; width: auto; }
+    .tune select { flex: 1; min-width: 0; }
+    @media (max-height: 680px) {
+      .col .card { padding: 0.55rem 0.8rem; margin-bottom: 0.45rem; }
+      .card h2 { margin-bottom: 0.45rem; }
+      .col .row { margin-bottom: 0.4rem; }
+      .chip { margin-top: 0.3rem; }
+      .paper-use { display: none; }
+    }
+    .tune .val-fixed { min-width: 2.2em; text-align: right; font-variant-numeric: tabular-nums; }
+    .tune small { color: var(--muted); }
+    .chip { display: flex; align-items: center; gap: 0.4rem; margin-top: 0.45rem; padding: 0.25rem 0.25rem 0.25rem 0.6rem; border: 1.5px dashed var(--faint); border-radius: 4px; font-size: 0.8rem; font-family: var(--mono); }
+    .chip[hidden] { display: none; }
+    .chip span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .chip .icon-btn, .col .chip .icon-btn { padding: 0.2rem 0.3rem; box-shadow: none; }
+    .chip .icon-btn::before { width: 13px; height: 13px; }
+    .custom-paper { display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; margin-bottom: 0.5rem; font-size: 0.85rem; }
+    .custom-paper[hidden] { display: none; }
+    .custom-paper input[type="number"] { width: 56px; }
+    /* La vista previa no empuja la altura: acaba donde acaban las otras columnas. */
+    @media (min-width: 1100px) and (min-height: 600px) {
+      .layout { flex: 0 1 auto; align-items: stretch; }
+      .col-preview { contain: size; min-height: 320px; }
+    }
+
+    .paper-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .paper-btns button { flex: 1 1 auto; }
+    .frame-scale { margin-top: 0.4rem; margin-bottom: 0; }
+    .frame-scale[hidden] { display: none; }
+    .test-canvas { display: block; width: 100%; max-width: 384px; margin: 0.4rem auto 0; image-rendering: pixelated; border: 1.5px solid var(--border-strong, #999); background: #fff; }
+    .about-box { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; margin-top: 0.9rem; padding-top: 0.7rem; border-top: 1px dashed var(--border-strong, #ccc); }
+    #donateBox:not([hidden]) { display: contents; }
+    .coffee-link { text-decoration: none; color: var(--text); display: inline-flex; align-items: center; padding: 0.4rem 0.7rem; border: 1.5px solid var(--border-strong, #999); border-radius: 6px; font-size: 0.85rem; }
+    .coffee-link::before { content: "☕"; margin-right: 0.35rem; }
+
+    /* ===== Móvil (pantallas estrechas): una columna, cabecera compacta y botón de imprimir siempre a mano ===== */
+    .only-touch { display: none; }
+    @media (pointer: coarse), (max-width: 700px) { .only-touch { display: inline; } .only-mouse { display: none; } }
+    :root { --sat: env(safe-area-inset-top, 0px); --sab: env(safe-area-inset-bottom, 0px); }
+    /* En la app Android los márgenes de las barras del sistema ya los pone la app */
+    .native-app { --sat: 0px; --sab: 0px; }
+    @media (max-width: 700px) {
+      body { padding: 0 10px calc(84px + var(--sab)); }
+      .topbar { position: static; flex-wrap: wrap; gap: 0.45rem; padding: 0.5rem 0.6rem; margin: 0.5rem 0 0.6rem; }
+      .brand { font-size: 0.95rem; flex: 1; }
+      .brand-logo { width: 26px; height: 26px; }
+      .topbar .status-group { flex-wrap: wrap; gap: 0.35rem; }
+      .topbar .status-group:first-of-type { order: 3; width: 100%; }
+      .topbar .pill { font-size: 0.68rem; padding: 0.2rem 0.45rem; }
+      .tb-sep { display: none; }
+      /* Ajustes y Registro: solo el icono */
+      #btnOpenSettings, #btnOpenLog, #btnInstall { font-size: 0; gap: 0; padding: 0.5rem 0.55rem; }
+      #btnOpenSettings::before, #btnOpenLog::before, #btnInstall::before { width: 18px; height: 18px; }
+      #btnConnectSerial, #btnDisconnect { flex: 1; }
+      #btnDisconnect:disabled { display: none; }
+      .layout { gap: 0.6rem; }
+      .col .card { padding: 0.7rem 0.75rem; }
+      /* Botones con tamaño cómodo para el dedo; letra de 16 px para que el móvil no haga zoom al escribir */
+      .col button { min-height: 40px; }
+      .col .icon-btn { min-width: 40px; }
+      input, select, textarea { font-size: 16px; }
+      .card h2 { flex-wrap: wrap; row-gap: 0.4rem; }
+      .hist-btns { margin-left: auto; }
+      .preview-card .sticker-desk { min-height: 120px; }
+      /* «Así quedará» se queda fija arriba al bajar por la página */
+      /* Fondo opaco también por los lados y encima, para que no asome nada por detrás */
+      .col-preview { position: sticky; top: var(--sat); z-index: 15; background: var(--bg); box-shadow: 0 -12px 0 0 var(--bg), 0 0 0 10px var(--bg); }
+      .col-preview .preview-card { margin-bottom: 0; }
+      .col-preview .sticker-desk { height: 19.5vh; max-height: 19.5vh; min-height: 100px; }
+      .col-preview .hint { display: none; }
+      .col-preview .card h2 { margin-bottom: 0.3rem; }
+      .tune { flex-wrap: wrap; }
+      .tune label { flex: 1 1 100%; }
+      .elist { grid-template-columns: 1fr; }
+      .layers-pop { left: 0.6rem; right: 0.6rem; width: auto; }
+      /* Imprimir: franja fija abajo, opaca y a todo el ancho */
+      body::after { content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: calc(76px + var(--sab)); background: var(--bg); border-top: 1.5px solid var(--border-strong, #999); z-index: 29; }
+      #btnPrint { position: fixed; left: 10px; right: 10px; bottom: calc(10px + var(--sab)); width: auto; z-index: 30; box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+      #btnCancelPrint { position: fixed; left: 10px; right: 10px; bottom: calc(76px + var(--sab)); width: auto !important; z-index: 30; }
+      #printProgress { position: fixed; left: 14px; right: 14px; bottom: calc(68px + var(--sab)); width: auto; z-index: 30; margin: 0; }
+      .toasts { left: 10px; right: 10px; bottom: calc(80px + var(--sab)); }
+      /* Ventanas a pantalla completa */
+      .panel-dialog, .paper-dialog { width: 100vw; max-width: 100vw; max-height: 100dvh; height: auto; margin: auto 0 0; border-radius: 12px 12px 0 0; padding: 0.8rem 0.8rem calc(1rem + var(--sab)); }
+      .gal-tiles { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    }
+    .native-app #btnInstall { display: none !important; }
+  </style>
+  <script>
+    try {
+      const t = localStorage.getItem("pm270.theme");
+      const dark = t ? t === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+    } catch {}
+  </script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><img src="icons/icon-192.png" alt="" class="brand-logo" /> Etiquetas PM270</div>
+
+      <div class="status-group">
+        <span id="statusPill" class="pill off">Desconectada</span>
+        <span id="batteryPill" class="pill i i-battery">--%</span>
+        <span id="paperPill" class="pill i i-tag">54×30 mm</span>
+      </div>
+
+      <div class="status-group">
+        <button id="btnOpenSettings" class="btn-soft i i-gear" type="button" title="Ajustes de impresión">Ajustes</button>
+        <button id="btnOpenLog" class="btn-soft i i-log" type="button" title="Registro técnico">Registro</button>
+        <button id="btnTheme" class="btn-soft icon-btn i i-moon" type="button" title="Modo oscuro" aria-label="Modo oscuro"></button>
+        <button id="btnInstall" class="btn-soft i i-download" type="button" hidden>Instalar app</button>
+        <span class="tb-sep" aria-hidden="true"></span>
+        <button id="btnConnectSerial" class="btn-blue i i-printer">Conectar impresora</button>
+        <button id="btnDisconnect" class="btn-red i i-unplug" disabled>Desconectar</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="col col-tools">
+        <div class="card">
+          <h2 class="i i-type">Texto <span id="textCount" class="meta"></span></h2>
+          <textarea id="textInput" placeholder="Escribe un nombre, una palabra o una lista. En modo lista: # título, x hecho."></textarea>
+          <div class="row">
+            <label>Letra
+              <input type="range" id="fontSize" min="14" max="80" value="30" style="width: 80px;" />
+              <span id="fontSizeVal" class="val-fixed" style="min-width: 24px;">30</span>
+            </label>
+            <select id="textAlign" aria-label="Alineación">
+              <option value="left">Izquierda</option>
+              <option value="center" selected>Centro</option>
+              <option value="right">Derecha</option>
+            </select>
+          </div>
+          <div class="row">
+            <button id="btnRotateText" class="btn-soft i i-rotate" type="button" title="Girar el texto 90°">Girar <span id="textRotVal">0°</span></button>
+            <button id="btnCenterText" class="btn-soft i i-target" type="button" title="Centrar texto">Centrar</button>
+            <button id="btnInsertDate" class="btn-soft icon-btn i i-calendar" type="button" aria-label="Insertar fecha" title="Insertar la fecha de hoy ({hoy}); también {hoy+7}, {dia}, {mes}, {año}, {hora}"></button>
+            <button id="btnNewText" class="btn-soft icon-btn i i-plus" type="button" title="Añadir otro texto (se mueve por separado)" aria-label="Añadir otro texto"></button>
+            <button id="btnClearText" class="btn-soft icon-btn i i-trash" type="button" title="Quitar este texto" aria-label="Quitar este texto"></button>
+          </div>
+          <div class="row" style="margin-bottom: 0;">
+            <label title="Cada línea lleva su casilla. # = título, x = hecho"><input type="checkbox" id="chkListMode" /> Lista con casillas</label>
+            <button id="btnShopList" class="btn-soft i i-cart" type="button">Lista de la compra</button>
+          </div>
+          <div id="textList" class="elist"></div>
+        </div>
+
+        <div class="card">
+          <h2 class="i i-image">Dibujo o foto <span id="imgCount" class="meta"></span></h2>
+          <div class="row">
+            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+            <button id="btnPickFile" class="btn-blue i i-upload" type="button">Foto</button>
+            <button id="btnStampStar" class="btn-soft icon-btn i i-star" type="button" title="Estrella" aria-label="Estrella"></button>
+            <button id="btnStampRocket" class="btn-soft icon-btn i i-rocket" type="button" title="Cohete" aria-label="Cohete"></button>
+            <button id="btnStampSmile" class="btn-soft icon-btn i i-smile" type="button" title="Carita" aria-label="Carita"></button>
+            <button id="btnClearImg" class="btn-soft icon-btn i i-trash" type="button" title="Quitar dibujo" aria-label="Quitar dibujo"></button>
+          </div>
+          <div class="row tune">
+            <label class="i i-zoom" title="Tamaño del dibujo" style="flex: 0 1 auto;">
+              <input type="range" id="imgScale" min="15" max="220" value="100" style="width: 70px; flex: none;" />
+              <span id="imgScaleVal" class="val-fixed">100%</span>
+            </label>
+            <button id="btnRotateImg" class="btn-soft icon-btn i i-rotate" type="button" title="Girar el dibujo 90°" aria-label="Girar el dibujo"></button>
+            <button id="btnCenterImg" class="btn-soft icon-btn i i-target" type="button" title="Centrar dibujo" aria-label="Centrar dibujo"></button>
+            <select id="binarizeMode" title="Cómo pasar la imagen a blanco y negro" aria-label="Modo de foto">
+              <option value="atkinson">Foto limpia</option>
+              <option value="dither" selected>Foto tramada</option>
+              <option value="threshold">Nítido (dibujos)</option>
+            </select>
+          </div>
+          <div class="row tune">
+            <label title="De −100 a +100">Brillo <input type="range" id="brightness" min="-100" max="100" value="0" /> <span id="brightnessVal" class="val-fixed">0</span></label>
+            <label title="De −100 a +100">Contraste <input type="range" id="contrast" min="-100" max="100" value="0" /> <span id="contrastVal" class="val-fixed">0</span></label>
+          </div>
+          <div id="imgList" class="elist"></div>
+        </div>
+
+        <div class="card gal-card">
+          <button id="btnGallery" class="btn-soft full gal-open" type="button" title="Plantillas, marcos, calendarios, pasatiempos, colorear, QR…">
+            <span class="gal-open-ic i i-grid" aria-hidden="true"></span>
+            <span class="gal-open-txt"><strong>Galería <span id="galCount" class="meta"></span></strong><small>Plantillas, marcos, calendarios, pasatiempos, colorear, QR</small></span>
+          </button>
+          <div class="elist gal-elist"><div id="galList" class="elist-in"></div><div id="galFrameChip" class="layer-row" hidden><span class="grip none"></span><span id="galFrameChipName" class="name"></span><button id="galFrameChipX" class="btn-soft icon-btn i i-x" type="button" title="Quitar el marco" aria-label="Quitar el marco"></button></div></div>
+          <div id="frameScaleRow" class="row tune frame-scale" hidden>
+            <label title="Tamaño del marco: de 50 % a 100 %"><span data-i18n="frame.size">Tamaño del marco</span> <input type="range" id="frameScale" min="50" max="100" value="100" /> <span id="frameScaleVal" class="val-fixed">100%</span></label>
+          </div>
+        </div>
+      </section>
+
+      <section class="col col-preview">
+        <div class="card preview-card">
+          <h2 class="i i-eye">Así quedará <span id="previewMeta" class="meta">384×216 px</span><span class="hist-btns"><button id="btnUndo" class="btn-soft icon-btn i i-undo" type="button" title="Deshacer (Ctrl+Z)" aria-label="Deshacer" disabled></button><button id="btnRedo" class="btn-soft icon-btn i i-redo" type="button" title="Rehacer (Ctrl+Y)" aria-label="Rehacer" disabled></button><button id="btnResetDesign" class="btn-soft icon-btn i i-trash" type="button" title="Empezar de nuevo: quitar todos los textos, fotos, dibujos y el marco (se puede deshacer)" aria-label="Empezar de nuevo"></button><button id="btnLayers" class="btn-soft layers-btn i i-layers" type="button" title="Lista de textos e imágenes: elegir, ordenar (arrastra ≡) y quitar" aria-expanded="false" aria-controls="layersPop">Capas <span id="layersCount">0</span></button></span></h2>
+          <div id="layersPop" class="layers-pop" hidden></div>
+          <div class="sticker-desk" id="stickerDesk">
+            <div class="canvas-stage">
+              <canvas id="previewCanvas" width="384" height="216"></canvas>
+              <canvas id="overlayCanvas" width="384" height="216"></canvas>
+            </div>
+            <canvas id="muralGuide" width="300" height="200" aria-label="Piezas del mural: toca para elegir cuáles imprimir"></canvas>
+            <p id="muralEmpty" class="mural-empty" hidden>Haz un diseño (texto, foto o algo de la Galería) y aquí verás cómo queda en grande.</p>
+          </div>
+          <p id="labelHint" class="hint"><span class="only-mouse" data-i18n="hint.mouse">Arrastra el dibujo y el texto para moverlos. Rueda del ratón = tamaño del dibujo.</span><span class="only-touch" data-i18n="hint.touch">Arrastra con el dedo para mover. Pellizca con dos dedos para cambiar el tamaño.</span></p>
+          <p id="muralHint" class="hint" hidden>Toca las piezas para elegir cuáles imprimir · <button id="muralAll" class="link-btn" type="button">Todas</button> · <button id="muralNone" class="link-btn" type="button">Ninguna</button> · <button id="muralHow" class="link-btn" type="button">Cómo montarlo</button> · <button id="muralSaveGuide" class="link-btn" type="button">Guardar guía</button></p>
+        </div>
+      </section>
+
+      <section class="col col-print">
+        <div class="card">
+          <h2 class="i i-roll">Papel</h2>
+          <div class="paper-row">
+            <select id="paperProfile" aria-label="Tipo de papel"></select>
+            <button id="btnFavPaper" class="btn-soft fav-btn i i-star" type="button" title="Añadir a mis papeles" aria-label="Añadir a mis papeles"></button>
+          </div>
+          <label class="only-favs"><input type="checkbox" id="chkOnlyFavs" /> Mostrar solo mis papeles</label>
+          <p id="paperUse" class="paper-use"></p>
+          <div id="customPaper" class="custom-paper" hidden>
+            <label>Ancho <input type="number" id="paperWidthMm" value="54" min="20" max="54" /> mm</label>
+            <label>Tipo
+              <select id="paperMode">
+                <option value="label" selected>Etiqueta</option>
+                <option value="continuous">Continuo</option>
+              </select>
+            </label>
+            <label id="labelHeightWrap">Alto <input type="number" id="labelHeightMm" value="30" min="10" max="200" /> mm</label>
+          </div>
+          <div class="row tune">
+            <label title="Lo oscuro que imprime: de 1 a 15">Intensidad <input type="range" id="density" min="1" max="15" value="10" /> <span class="val-fixed"><span id="densityVal">10</span><small> /15</small></span></label>
+          </div>
+          <div class="row tune">
+            <label title="Espacio sin imprimir arriba y abajo: de 0 a 4 mm (0–32 puntos)">Margen <input type="range" id="marginY" min="0" max="32" value="12" /> <span class="val-fixed"><span id="marginYVal">1,5 mm</span><small> /4</small></span></label>
+          </div>
+          <div class="paper-btns">
+            <button id="btnTestLabel" class="btn-soft i i-grid" type="button" title="Imprime una etiqueta con muestras de brillo, contraste y modo de foto para ver cuál te gusta más" data-i18n="test.button">Etiqueta de prueba</button>
+            <button id="btnOpenBuy" class="btn-soft i i-search" type="button">¿Qué papel compro?</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="seg" role="group" aria-label="Qué imprimir">
+            <button id="modeLabel" class="active" type="button" aria-pressed="true">Etiqueta</button>
+            <button id="modeMural" type="button" aria-pressed="false" title="Amplía el diseño y lo divide en piezas que se pegan juntas">Mural</button>
+          </div>
+          <div id="labelPane">
+            <div class="row copies-row">
+              <label>Copias <input type="number" id="copies" value="1" min="1" max="99" style="width: 64px;" /></label>
+            </div>
+            <div class="row perline-row">
+              <label title="Cada línea del texto sale en su propia etiqueta (lista de nombres, por ejemplo)"><input type="checkbox" id="chkPerLine" /> Una por línea</label>
+              <span id="perLineNav" class="perline-nav" hidden>
+                <button id="perLinePrev" class="btn-soft icon-btn" type="button" aria-label="Línea anterior">‹</button>
+                <span id="perLineInfo" class="meta"></span>
+                <button id="perLineNext" class="btn-soft icon-btn" type="button" aria-label="Línea siguiente">›</button>
+              </span>
+            </div>
+          </div>
+          <div id="muralPane" class="mural-pane" hidden>
+            <div class="row">
+              <label>Piezas <input type="number" id="muralCols" min="1" max="10" value="3" title="Columnas" aria-label="Columnas" /></label>
+              <label>× <input type="number" id="muralRows" min="1" max="10" value="1" title="Filas" aria-label="Filas" /></label>
+              <button id="muralFitRows" class="btn-soft icon-btn i i-wand" type="button" title="Calcular las filas para que el mural tenga la forma del diseño" aria-label="Ajustar filas al diseño"></button>
+            </div>
+            <div class="row">
+              <label id="muralStripWrap" title="Largo de cada tira de rollo continuo">Tira <input type="number" id="muralStrip" min="20" max="400" value="100" /> mm</label>
+              <label title="Cada pieza repite un trozo de la siguiente para pegarlas una encima de otra">Solape <input type="number" id="muralOverlap" min="0" max="20" step="1" value="0" /> mm</label>
+            </div>
+            <select id="muralFit" aria-label="Encuadre">
+              <option value="cover">Llenar el mural (recorta lo que sobre)</option>
+              <option value="contain">Diseño entero (con bordes blancos)</option>
+            </select>
+            <div class="row">
+              <label title="Piezas tumbadas: útil para tiras horizontales"><input type="checkbox" id="muralRotate" /> Girar</label>
+              <label title="Imprime en cada pieza su número y su sitio (fila y columna) fuera de la imagen, en la parte que se recorta"><input type="checkbox" id="muralNumbers" checked /> Nº impreso</label>
+            </div>
+            <p class="mural-total"><strong id="muralSize">—</strong> · <span id="muralCount"></span></p>
+            <p id="muralWarn" class="mural-warn" hidden>El papel redondo no sirve para murales: elige uno rectangular.</p>
+          </div>
+          <button id="btnPrint" class="btn-print-big i i-printer" disabled>Imprimir etiqueta</button>
+          <button id="btnCancelPrint" class="btn-red full i i-stop" type="button" hidden style="margin-top: 0.5rem;">Detener</button>
+          <progress id="printProgress" value="0" max="100" style="display: none;"></progress>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="settingsDialog" class="panel-dialog">
+    <div class="dialog-head"><h3>Ajustes</h3><button class="btn-soft dialog-close icon-btn i i-x" type="button" data-close aria-label="Cerrar"></button></div>
+      <p class="list-help">El papel, la intensidad, el margen y el modo de foto se cambian en la pantalla principal.</p>
+      <div class="row">
+        <label><input type="checkbox" id="chkSendGap" /> Enviar GAP:
+          <input type="number" id="gapMm" value="3" min="0" max="20" style="width: 60px;" /> mm
+        </label>
+        <label><input type="checkbox" id="invertBits" /> Invertir blanco/negro</label>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="chkIgnoreChip" /> Mi cartucho está rellenado con otro papel (no usar el chip del rollo)</label>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="chkStatusCheck" checked /> Comprobar la impresora antes de imprimir (papel, tapa…)</label>
+      </div>
+      <div id="bleBox" class="row" hidden>
+        <button id="btnConnectBle" class="btn-soft i i-printer" type="button" data-i18n="conn.ble">Conectar por Bluetooth LE</button>
+        <small class="list-help" data-i18n="conn.bleHelp">Otra forma de conectar, para móviles o navegadores sin puerto serie. Primero prueba «Conectar impresora».</small>
+      </div>
+      <div class="about-box">
+        <div id="donateBox" hidden>
+        <a id="coffeeLink" class="btn-soft coffee-link" href="#" target="_blank" rel="noopener" data-i18n="about.coffee">Invítame a un café</a>
+        <small class="list-help" data-i18n="about.coffeeHelp">La app es gratuita y sin anuncios. Si te resulta útil, puedes apoyarla con un café.</small>
+        </div>
+        <p class="hint about-legal"><span data-i18n="about.legal">Proyecto independiente y de código abierto (licencia AGPL-3.0), no afiliado a Nelko. Nelko es marca de su titular. Se ofrece sin ninguna garantía.</span>
+          <br><span data-i18n="about.version">Versión</span> <span id="appVersion"></span> · <a href="https://github.com/alialabdev/etiquetas-termica-pm270" target="_blank" rel="noopener" data-i18n="about.source">Código fuente</a></p>
+      </div>
+      </dialog>
+
+  <dialog id="logDialog" class="panel-dialog">
+    <div class="dialog-head"><h3>Registro técnico</h3><button class="btn-soft dialog-close icon-btn i i-x" type="button" data-close aria-label="Cerrar"></button></div>
+
+      <div class="row">
+        <button class="btn-soft cmd-btn" data-cmd="CONFIG?" disabled>CONFIG?</button>
+        <button class="btn-soft cmd-btn" data-cmd="BATTERY?" disabled>BATTERY?</button>
+        <button id="btnStatusByte" class="btn-soft" disabled>Estado</button>
+        <button id="btnLabelBlock" class="btn-soft" disabled>Info Rollo</button>
+        <button id="btnSelftest" class="btn-soft" disabled>SELFTEST</button>
+        <button id="btnClearLog" class="btn-soft" type="button">Limpiar log</button>
+      </div>
+      <pre id="log"></pre>
+      </dialog>
+
+  <dialog id="buyDialog" class="panel-dialog">
+    <div class="dialog-head"><h3>¿Qué papel compro?</h3><button class="btn-soft dialog-close icon-btn i i-x" type="button" data-close aria-label="Cerrar"></button></div>
+    <div class="buy-body">
+              <p><strong>Lo primero, la salud:</strong> el papel térmico normal lleva un revelador químico. Desde 2020 la UE limita el <strong>BPA</strong>, pero muchos fabricantes lo cambiaron por <strong>BPS</strong>, que es muy parecido. Busca siempre en la ficha:</p>
+              <ul>
+                <li>✅ <strong>«Sin fenoles» / «phenol-free»</strong>: no lleva ni BPA ni BPS. Es la mejor opción.</li>
+                <li>✅ Papeles con tecnología <strong>Blue4est®</strong> (Koehler), que no usa revelador químico.</li>
+                <li>⚠️ «BPA free» a secas no basta: puede llevar BPS. Pregunta o busca «BPA <em>y</em> BPS free».</li>
+                <li>❌ Evita papel sin marca ni ficha técnica, y el papel de tickets genérico.</li>
+              </ul>
+              <p><strong>Que encaje en la PM270:</strong></p>
+              <ul>
+                <li>Papel <strong>térmico directo</strong> (no necesita cinta ni tinta).</li>
+                <li>Ancho de <strong>50 a 54 mm</strong>. El cabezal imprime 48 mm. Con papel más estrecho la app centra el dibujo, pero conviene probar con una sola etiqueta.</li>
+                <li>Los rollos originales de Nelko llevan un chip que la impresora lee y la app ajusta el tamaño sola. Con rollos de otras marcas elige el tipo aquí a mano.</li>
+              </ul>
+              <p data-buy="label" class="buy-tip">🏷️ <strong>Etiquetas:</strong> para cocina y congelador busca adhesivo «resistente al frío» y acabado resistente al agua y la grasa.</p>
+              <p data-buy="continuous" class="buy-tip">📜 <strong>Rollo continuo:</strong> para listas de la compra va bien papel continuo de 50–54 mm <strong>sin fenoles</strong>. Si lo quieres pegar, hay rollo continuo adhesivo.</p>
+              <p><a id="buyLink" href="https://www.amazon.es/" target="_blank" rel="noopener">🔎 Buscar en Amazon</a><br /><span class="buy-note">Es una búsqueda, no una recomendación de un producto concreto: comprueba en la ficha que diga «sin fenoles» o «BPA y BPS free».</span></p>
+              <p class="buy-note">Consejo: guarda el papel lejos del calor y de la luz. Y lávate las manos si manejas mucho papel térmico, aunque sea sin fenoles.</p>
+            </div>
+  </dialog>
+
+  <dialog id="favDialog" class="paper-dialog">
+    <h3>Guardar en mis papeles</h3>
+    <p class="list-help">Se guardan el tipo, el ancho, el alto y el GAP que tienes puestos ahora.</p>
+    <div class="row"><label style="width: 100%;">Nombre <input type="text" id="favName" style="flex: 1;" /></label></div>
+    <div class="row"><label style="width: 100%;">Nota <input type="text" id="favNote" placeholder="Marca, dónde lo compraste, sin fenoles…" style="flex: 1;" /></label></div>
+    <div class="row" style="justify-content: flex-end;">
+      <button id="favCancel" class="btn-soft" type="button">Cancelar</button>
+      <button id="favOk" class="btn-blue" type="button">Guardar</button>
+    </div>
+  </dialog>
+
+  <dialog id="testDialog" class="paper-dialog test-dialog">
+    <div class="dialog-head"><h3 data-i18n="test.title">Etiqueta de prueba</h3><button class="btn-soft dialog-close icon-btn i i-x" type="button" data-close aria-label="Cerrar"></button></div>
+    <p class="list-help" data-i18n="test.help">Una sola etiqueta con 12 muestras: cada fila es un modo de foto (limpia, tramada, nítido) y cada columna cambia el brillo o el contraste respecto a lo que tienes puesto. La intensidad es la misma para toda la etiqueta y va escrita arriba: para compararla, imprime otra con otra intensidad.</p>
+    <canvas id="testCanvas" class="test-canvas" width="384" height="216"></canvas>
+    <div class="row" style="justify-content: flex-end; margin-top: 0.6rem;">
+      <button class="btn-soft" type="button" data-close data-i18n="common.cancel">Cancelar</button>
+      <button id="testPrint" class="btn-blue i i-printer" type="button" data-i18n="test.print">Imprimir prueba</button>
+    </div>
+  </dialog>
+
+  <dialog id="paperDialog" class="paper-dialog">
+    <h3>¿Papel correcto?</h3>
+    <p id="paperDialogWarn" class="dialog-warn" hidden></p>
+    <p id="paperDialogText"></p>
+    <div class="row" style="justify-content: flex-end;">
+      <button id="paperDialogCancel" class="btn-soft" type="button">Cancelar</button>
+      <button id="paperDialogOk" class="btn-blue" type="button">Sí, imprimir</button>
+    </div>
+  </dialog>
+
+  <dialog id="galleryDialog" class="panel-dialog gallery">
+    <div class="dialog-head"><h3>Galería</h3><button class="btn-soft dialog-close icon-btn i i-x" type="button" data-close aria-label="Cerrar"></button></div>
+    <div id="galTabs" class="gal-tabs"></div>
+    <div id="galOptions" class="gal-options"></div>
+    <div id="galTiles" class="gal-tiles"></div>
+  </dialog>
+
+  <dialog id="muralHowDialog" class="paper-dialog">
+    <div class="dialog-head"><h3>Cómo montar el mural</h3><button class="btn-soft dialog-close icon-btn i i-x" type="button" data-close aria-label="Cerrar"></button></div>
+    <ol id="muralSteps" class="mural-steps"></ol>
+  </dialog>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <script src="version.js?v=65"></script>
+  <script src="i18n.js?v=65"></script>
+  <script src="app.js?v=65"></script>
+  <script src="vendor/qrcode.js?v=65"></script>
+  <script src="creativo.js?v=65"></script>
+  <script src="mural.js?v=65"></script>
+</body>
+</html>

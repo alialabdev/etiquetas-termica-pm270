@@ -1,0 +1,22 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Android / Gradle
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+
+# Nunca subir claves de firma ni contraseñas
+*.p12
+*.jks
+*.keystore
+*.pem
+*.key
+firma*/
+.env

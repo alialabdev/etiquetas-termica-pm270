@@ -1,0 +1,130 @@
+# Compila la app Android (APK) con la web de la carpeta web/ dentro.
+# - En cualquier rama: publica la APK como prerelease «apk-prueba» (se sustituye cada vez).
+# - En main: publica la versión vX en Releases.
+# Firma: con la clave propia de la app (secretos FIRMA_P12 y FIRMA_CLAVE), así cada versión
+# nueva se instala encima de la anterior. Ver el paso «Firmar APK».
+name: APK Android
+
+on:
+  push:
+    paths:
+      - "web/**"
+      - "android/**"
+      - ".github/workflows/apk.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compilar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+        with:
+          gradle-version: "8.14.3"
+      - name: Compilar APK sin firmar
+        run: gradle -p android assembleRelease --no-daemon --stacktrace
+
+      # El único paso que recibe los secretos. Clave propia de esta app (alias «etiquetas»):
+      # FIRMA_P12 = el archivo etiquetas.p12 en base64, FIRMA_CLAVE = su contraseña.
+      # Se comprueba que la huella del certificado es la esperada.
+      # Sin FIRMA_P12 se firma con una clave de pruebas de un solo uso (aviso en el resumen).
+      - name: Firmar APK
+        env:
+          FIRMA_P12: ${{ secrets.FIRMA_P12 }}
+          FIRMA_CLAVE: ${{ secrets.FIRMA_CLAVE }}
+          HUELLA_ESPERADA: 5dca4a4e58d8ac0f27724ef7502f63e8a5e01cbade708c5017ff9eb3ecf2bb41
+        run: |
+          set -eo pipefail
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          ENTRADA=android/app/build/outputs/apk/release/app-release-unsigned.apk
+          ALMACEN="$RUNNER_TEMP/firma.p12"
+          if [ -n "$FIRMA_P12" ] && [ -z "$FIRMA_CLAVE" ]; then
+            echo "::error::Está el secreto FIRMA_P12 pero falta FIRMA_CLAVE (la contraseña de la clave)."
+            exit 1
+          fi
+          if [ -n "$FIRMA_P12" ]; then
+            printf '%s' "$FIRMA_P12" | tr -d ' \r\n' | base64 -d > "$ALMACEN"
+            ALIAS=etiquetas
+            COMPROBAR=1
+          else
+            echo "::warning::Faltan los secretos FIRMA_P12 o FIRMA_CLAVE: APK firmada con una clave de pruebas (para instalar la siguiente habrá que desinstalar antes)."
+            FIRMA_CLAVE=$(openssl rand -hex 16)
+            export FIRMA_CLAVE
+            keytool -genkeypair -keystore "$ALMACEN" -storetype pkcs12 -storepass:env FIRMA_CLAVE \
+              -alias pruebas -keyalg RSA -keysize 2048 -validity 30 -dname "CN=Pruebas" > /dev/null 2>&1
+            ALIAS=pruebas
+            COMPROBAR=0
+          fi
+          AYUDA_ZA=$("$BT/zipalign" 2>&1 || true)
+          case "$AYUDA_ZA" in *"-P "*) ZA="-P 16" ;; *) ZA="-p" ;; esac
+          "$BT/zipalign" $ZA 4 "$ENTRADA" alineado.apk
+          mkdir salida
+          VERSION=$(sed -n 's/.*APP_VERSION *= *"\([^"]*\)".*/\1/p' web/version.js)
+          if [ "$GITHUB_REF_NAME" = "main" ]; then NOMBRE="$VERSION"; else NOMBRE="$VERSION-prueba.${GITHUB_RUN_NUMBER}"; fi
+          SALIDA="salida/EtiquetasPM270-$NOMBRE.apk"
+          "$BT/apksigner" sign \
+            --ks "$ALMACEN" --ks-type pkcs12 --ks-key-alias "$ALIAS" \
+            --ks-pass env:FIRMA_CLAVE \
+            --v1-signing-enabled false --v2-signing-enabled true --v3-signing-enabled true \
+            --out "$SALIDA" alineado.apk
+          rm -f alineado.apk "$ALMACEN"
+          "$BT/apksigner" verify --print-certs --min-sdk-version 26 "$SALIDA" > verificacion.txt
+          HUELLA=$( (grep -E "certificate SHA-256 digest:" verificacion.txt || true) | head -1 | awk '{print $NF}' | tr 'A-F' 'a-f')
+          rm verificacion.txt
+          echo "Huella: $HUELLA"
+          if [ "$COMPROBAR" = 1 ] && [ "$HUELLA" != "$HUELLA_ESPERADA" ]; then
+            echo "::error::La huella del certificado no es la esperada: no se publica."
+            exit 1
+          fi
+          [ "$COMPROBAR" = 1 ] && echo "::notice::Firmada con la clave de la app (huella comprobada)."
+          true
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: apk
+          path: salida/*.apk
+          retention-days: 14
+
+  publicar:
+    needs: compilar
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: apk
+          path: salida
+      - name: Publicar en Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RAMA: ${{ github.ref_name }}
+        run: |
+          APK=$(ls salida/*.apk)
+          if [ "$RAMA" = "main" ]; then
+            VERSION=$(basename "$APK" .apk | sed 's/^EtiquetasPM270-//')
+            # Solo se publica una versión nueva cuando cambia web/version.js
+            if gh release view "v$VERSION" > /dev/null 2>&1; then
+              echo "::notice::La versión $VERSION ya está publicada: sube APP_VERSION en web/version.js para publicar otra."
+              exit 0
+            fi
+            gh release create "v$VERSION" "$APK" --target "$GITHUB_SHA" \
+              --title "Etiquetas PM270 $VERSION" --notes "APK para Android. Descárgala en el móvil e instálala."
+          else
+            gh release delete apk-prueba --yes --cleanup-tag || true
+            gh release create apk-prueba "$APK" --prerelease --target "$GITHUB_SHA" \
+              --title "APK de prueba" --notes "Compilada desde la rama ${RAMA}. Solo para probar."
+          fi

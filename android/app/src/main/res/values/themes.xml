@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="crema">#EFEBE3</color>
+    <style name="Tema" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/crema</item>
+        <item name="android:statusBarColor">@color/crema</item>
+        <item name="android:navigationBarColor">@color/crema</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>
