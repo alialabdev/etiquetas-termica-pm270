@@ -12,7 +12,7 @@ Gratis, sin anuncios, sin cuentas y sin enviar tus datos a ningún sitio.</p>
   <a href="https://alialabdev.github.io/etiquetas-termica-pm270/"><img alt="Abrir en el navegador (PC)" src="https://img.shields.io/badge/Abrir_en_el_navegador-PC-1f2937?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
 </p>
 <p align="center">
-  <a href="../../releases/latest"><img alt="versión" src="https://img.shields.io/github/v/release/alialabdev/etiquetas-termica-pm270?label=versión&color=0f766e"></a>
+  <a href="../../releases/latest"><img alt="versión" src="https://img.shields.io/github/v/release/alialabdev/etiquetas-termica-pm270?label=versi%C3%B3n&color=0f766e"></a>
   <a href="LICENSE"><img alt="licencia" src="https://img.shields.io/github/license/alialabdev/etiquetas-termica-pm270?label=licencia&color=555"></a>
 </p>
 
