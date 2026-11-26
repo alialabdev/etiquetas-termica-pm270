@@ -40,7 +40,7 @@ jobs:
       # El único paso que recibe los secretos. Clave propia de esta app (alias «etiquetas»):
       # FIRMA_P12 = el archivo etiquetas.p12 en base64, FIRMA_CLAVE = su contraseña.
       # Se comprueba que la huella del certificado es la esperada.
-      # Sin FIRMA_P12 se firma con una clave de pruebas de un solo uso (aviso en el resumen).
+      # Sin FIRMA_P12: en main falla; en otras ramas firma con una clave de pruebas de un solo uso (aviso).
       - name: Firmar APK
         env:
           FIRMA_P12: ${{ secrets.FIRMA_P12 }}
@@ -59,6 +59,9 @@ jobs:
             printf '%s' "$FIRMA_P12" | tr -d ' \r\n' | base64 -d > "$ALMACEN"
             ALIAS=etiquetas
             COMPROBAR=1
+          elif [ "$GITHUB_REF_NAME" = "main" ]; then
+            echo "::error::Faltan los secretos FIRMA_P12 y FIRMA_CLAVE: en main no se publica ninguna APK sin la clave de la app."
+            exit 1
           else
             echo "::warning::Faltan los secretos FIRMA_P12 o FIRMA_CLAVE: APK firmada con una clave de pruebas (para instalar la siguiente habrá que desinstalar antes)."
             FIRMA_CLAVE=$(openssl rand -hex 16)
