@@ -115,6 +115,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           RAMA: ${{ github.ref_name }}
+          HUELLA_ESPERADA: 5dca4a4e58d8ac0f27724ef7502f63e8a5e01cbade708c5017ff9eb3ecf2bb41
         run: |
           APK=$(ls salida/*.apk)
           if [ "$RAMA" = "main" ]; then
@@ -124,8 +125,25 @@ jobs:
               echo "::notice::La versión $VERSION ya está publicada: sube APP_VERSION en web/version.js para publicar otra."
               exit 0
             fi
+            SUMA=$(sha256sum "$APK" | awk '{print $1}')
+            NOMBRE=$(basename "$APK")
+            {
+              echo "## Etiquetas PM270 $VERSION"
+              echo
+              echo "**Android:** descarga \`$NOMBRE\` en el móvil y ábrelo para instalarlo (se instala encima de la versión anterior)."
+              echo
+              echo "**PC:** usa la versión web en https://alialabdev.github.io/etiquetas-termica-pm270/ con Chrome o Edge."
+              echo
+              echo "Huella SHA-256 de la APK, para comprobarla si quieres:"
+              echo
+              echo "\`\`\`"
+              echo "$SUMA  $NOMBRE"
+              echo "\`\`\`"
+              echo
+              echo "Certificado de firma (SHA-256): \`$HUELLA_ESPERADA\`"
+            } > notas.md
             gh release create "v$VERSION" "$APK" --target "$GITHUB_SHA" \
-              --title "Etiquetas PM270 $VERSION" --notes "APK para Android. Descárgala en el móvil e instálala."
+              --title "Etiquetas PM270 $VERSION" --notes-file notas.md
           else
             gh release delete apk-prueba --yes --cleanup-tag || true
             gh release create apk-prueba "$APK" --prerelease --target "$GITHUB_SHA" \

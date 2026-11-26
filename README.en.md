@@ -8,22 +8,17 @@
 Free, no ads, no accounts, and your data never leaves your device.</p>
 
 <p align="center">
-  <a href="../../releases/latest">Download the Android app (APK)</a> ·
-  <a href="https://alialabdev.github.io/etiquetas-termica-pm270/">Open the web version</a> ·
-  <a href="README.md">Español</a>
+  <a href="../../releases/latest"><img alt="Download for Android (APK)" src="https://img.shields.io/badge/Download_for_Android-APK-0f766e?style=for-the-badge&logo=android&logoColor=white"></a>
+  <a href="https://alialabdev.github.io/etiquetas-termica-pm270/"><img alt="Open in your browser (PC)" src="https://img.shields.io/badge/Open_in_your_browser-PC-1f2937?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
 </p>
-
 <p align="center">
-  <img src="docs/capturas/escritorio.png" alt="The app on a PC: text, frame and label preview" width="820" />
+  <a href="../../releases/latest"><img alt="version" src="https://img.shields.io/github/v/release/alialabdev/etiquetas-termica-pm270?label=version&color=0f766e"></a>
+  <a href="LICENSE"><img alt="license" src="https://img.shields.io/github/license/alialabdev/etiquetas-termica-pm270?label=license&color=555"></a>
 </p>
 
-<table>
-  <tr>
-    <td align="center" width="25%"><img src="docs/capturas/movil.png" alt="The app on an Android phone" width="200" /><br><sub>On your phone</sub></td>
-    <td align="center"><img src="docs/capturas/galeria.png" alt="Gallery: crosswords, word searches and mazes" width="560" /><br><sub>Gallery: templates, frames, puzzles, colouring, QR…</sub><br><br>
-    <img src="docs/capturas/prueba.png" alt="Test label with 12 photo setting samples" width="560" /><br><sub>Test label to tune photos without wasting paper</sub></td>
-  </tr>
-</table>
+<p align="center"><a href="#how-to-use-it">How to use it</a> · <a href="#what-you-can-make">What you can make</a> · <a href="#tips-and-troubleshooting">Troubleshooting</a> · <a href="#security-and-privacy">Privacy</a> · <a href="#for-developers">Developers</a> · <a href="README.md">Español</a></p>
+
+<p align="center"><img src="docs/fotos/pm270-alialab.jpg" alt="PM270 printer printing a label designed with the app" width="520"></p>
 
 > **Independent project.** This app is not made, affiliated, sponsored or endorsed by Nelko. "Nelko" and "PM270" are mentioned only to say which printer it works with. It contains no logos, code or files from the official app: the printer protocol was written from scratch by testing with a printer of my own.
 >
@@ -35,17 +30,6 @@ Behind ALIALAB there is one person with ideas and curiosity, not a team of devel
 
 I share it as free software in case it is useful to someone else. If you find a bug or have an idea, please open an issue.
 
-## Features
-
-- **Text, stamps and photos** you can drag and resize (mouse, or pinch on a phone).
-- **Photos tuned for thermal paper**: levels, brightness, contrast, sharpness and dithering, plus a **test label** with 12 samples so you can see each setting before wasting paper.
-- **Paper types**: labels of several sizes, round labels and continuous roll. Rolls with a chip are detected automatically. **My papers** remembers the ones you own.
-- **Checklists** (`# Title`, one line per item, `x` in front to tick it) and **rotated text** 90°/180°/270°.
-- **Automatic dates**: `{hoy}` (today), `{hoy+7}`, `{dia}`, `{mes}`, `{año}`, `{hora}`.
-- **Gallery**: templates (jar, freezer, expiry, gift, medication, Wi-Fi…), 26 resizable frames, calendars, puzzles (crosswords, word searches, mazes), colouring pages, **QR codes** and **barcodes** (Code 128, EAN-13), and **My designs**.
-- **Mural**: splits a large picture into numbered labels that you stick together.
-- **Multiple copies** (1–99), with a paper and lid check before printing so you don't waste labels.
-- **"Which paper should I buy?"** guide: **phenol-free thermal paper (BPA and BPS free)**.
 
 ## How to use it
 
@@ -65,6 +49,67 @@ The APK contains the same app as the web version and works offline. The only per
 4. Optionally click **Instalar app** to get a desktop shortcut that also works offline.
 
 To use it fully offline you can also download the project (**Code → Download ZIP**) and double-click `web/abrir_etiquetas.bat` (needs Python 3): it opens the app at `http://localhost:8000`.
+
+## What you can make
+
+All of these come from the app's gallery in one tap, and then you change them as you like. The images are exactly what gets printed.
+
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="docs/ejemplos/tarro.png" alt="Kitchen jars with today's date" width="260"><br><sub>Kitchen jars with today's date</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/congelador.png" alt="Freezer: portions and expiry" width="260"><br><sub>Freezer: portions and expiry</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/compra.png" alt="Checklists" width="260"><br><sub>Checklists</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><img src="docs/ejemplos/qr.png" alt="QR codes and barcodes" width="260"><br><sub>QR codes and barcodes</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/mudanza.png" alt="Moving boxes" width="260"><br><sub>Moving boxes</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/calendario.png" alt="Monthly calendars" width="260"><br><sub>Monthly calendars</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><img src="docs/ejemplos/sopa.png" alt="Word searches and crosswords" width="260"><br><sub>Word searches and crosswords</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/laberinto.png" alt="Mazes" width="260"><br><sub>Mazes</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/colorear.png" alt="Colouring pages" width="260"><br><sub>Colouring pages</sub></td>
+  </tr>
+</table>
+
+<details>
+<summary><b>All features</b></summary>
+
+- **Text, stamps and photos** you can drag and resize (mouse, or pinch on a phone).
+- **Photos tuned for thermal paper**: levels, brightness, contrast, sharpness and dithering, plus a **test label** with 12 samples so you can see each setting before wasting paper.
+- **Paper types**: labels of several sizes, round labels and continuous roll. Rolls with a chip are detected automatically. **My papers** remembers the ones you own.
+- **Checklists** (`# Title`, one line per item, `x` in front to tick it) and **rotated text** 90°/180°/270°.
+- **Automatic dates**: `{hoy}` (today), `{hoy+7}`, `{dia}`, `{mes}`, `{año}`, `{hora}`.
+- **Gallery**: templates (jar, freezer, expiry, gift, medication, Wi-Fi…), 26 resizable frames, calendars, puzzles (crosswords, word searches, mazes), colouring pages, **QR codes** and **barcodes** (Code 128, EAN-13), and **My designs**.
+- **Mural**: splits a large picture into numbered labels that you stick together.
+- **Multiple copies** (1–99), with a paper and lid check before printing so you don't waste labels.
+- **"Which paper should I buy?"** guide: **phenol-free thermal paper (BPA and BPS free)**.
+
+</details>
+
+## What the app looks like
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/capturas/movil.png" alt="The app on an Android phone" width="200"><br><sub>On your phone</sub></td>
+    <td align="center"><img src="docs/capturas/escritorio.png" alt="The app on a PC: text, frame and preview" width="560"><br><sub>On your PC</sub><br><br>
+    <img src="docs/capturas/galeria.png" alt="Puzzle gallery" width="560"><br><sub>Gallery: templates, frames, puzzles, colouring, QR…</sub></td>
+  </tr>
+</table>
+
+## Tips and troubleshooting
+
+<img src="docs/fotos/pm270-prueba.jpg" alt="Test label printed on the PM270" width="300" align="right">
+
+- **The printer does not show up.** Check that it is on and paired (on a PC in Settings → Bluetooth; on a phone in Settings → Bluetooth). It only accepts one connection at a time: disconnect it from your phone, the official app or another tab first.
+- **Android cannot find it.** Accept the **nearby devices** permission the first time. If you denied it, enable it in Settings → Apps → Etiquetas PM270 → Permissions.
+- **The connection was lost.** The app tries to reconnect by itself. If it cannot, turn the printer off and on and tap **Conectar impresora**.
+- **The print is too light or too dark.** Change **Intensidad** (intensity) in the paper panel. For photos, print the **test label** (photo on the right): one label shows 12 combinations of mode, brightness and contrast so you can pick the best one.
+- **It says there is no paper or the lid is open.** The printer reports both in the same way: check both.
+- **You refilled the cartridge with other paper.** Turn on "Mi cartucho está rellenado" in Settings so the app ignores the size stored in the roll chip.
+- **The sides are slightly cut.** The printer loses about 2 mm on each side edge; keep that margin in your designs.
+
+<br clear="right">
 
 ## Security and privacy
 
