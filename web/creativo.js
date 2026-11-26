@@ -1128,7 +1128,7 @@ const TEMPLATES = [
   { id: "congelador", name: "Congelador", text: "POLLO AL CURRY\n2 raciones\nCongelado: {hoy}\nConsumir antes: {hoy+90}", frame: "doble", font: 22 },
   { id: "abierto", name: "Abierto / caduca", text: "Abierto: {hoy}\nCaduca: {hoy+7}", frame: "ticket", font: 26 },
   { id: "nombre", name: "Nombre (cole)", text: "Lucía García", frame: "estrellas", font: 40 },
-  { id: "regalo", name: "Regalo", text: "Para: Ana\nDe: Andrés\n¡Feliz cumpleaños!", frame: "corazones", font: 26 },
+  { id: "regalo", name: "Regalo", text: "Para: Ana\nDe: Marta\n¡Feliz cumpleaños!", frame: "corazones", font: 26 },
   { id: "remite", name: "Remitente", text: "REMITE:\nNombre Apellido\nC/ Mayor 1, 2ºA\n28001 Madrid", frame: "linea", font: 20 },
   { id: "planta", name: "Planta", text: "ALBAHACA\nRegar: lunes y jueves\nSembrada: {hoy}", frame: "hojas", font: 24 },
   { id: "caja", name: "Caja de mudanza", text: "CAJA 1\nCOCINA\n⚠ FRÁGIL", frame: "grueso", font: 32 },
