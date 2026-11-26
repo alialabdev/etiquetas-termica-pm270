@@ -8,22 +8,17 @@
 Gratis, sin anuncios, sin cuentas y sin enviar tus datos a ningún sitio.</p>
 
 <p align="center">
-  <a href="../../releases/latest">Descargar la app Android (APK)</a> ·
-  <a href="https://alialabdev.github.io/etiquetas-termica-pm270/">Abrir la versión web</a> ·
-  <a href="README.en.md">English</a>
+  <a href="../../releases/latest"><img alt="Descargar para Android (APK)" src="https://img.shields.io/badge/Descargar_para_Android-APK-0f766e?style=for-the-badge&logo=android&logoColor=white"></a>
+  <a href="https://alialabdev.github.io/etiquetas-termica-pm270/"><img alt="Abrir en el navegador (PC)" src="https://img.shields.io/badge/Abrir_en_el_navegador-PC-1f2937?style=for-the-badge&logo=googlechrome&logoColor=white"></a>
 </p>
-
 <p align="center">
-  <img src="docs/capturas/escritorio.png" alt="La app en el PC: texto, marco y vista previa de la etiqueta" width="820" />
+  <a href="../../releases/latest"><img alt="versión" src="https://img.shields.io/github/v/release/alialabdev/etiquetas-termica-pm270?label=versión&color=0f766e"></a>
+  <a href="LICENSE"><img alt="licencia" src="https://img.shields.io/github/license/alialabdev/etiquetas-termica-pm270?label=licencia&color=555"></a>
 </p>
 
-<table>
-  <tr>
-    <td align="center" width="25%"><img src="docs/capturas/movil.png" alt="La app en un móvil Android" width="200" /><br><sub>En el móvil</sub></td>
-    <td align="center"><img src="docs/capturas/galeria.png" alt="Galería: crucigramas, sopas de letras y laberintos" width="560" /><br><sub>Galería: plantillas, marcos, pasatiempos, colorear, QR…</sub><br><br>
-    <img src="docs/capturas/prueba.png" alt="Etiqueta de prueba con 12 muestras de ajustes de foto" width="560" /><br><sub>Etiqueta de prueba para afinar las fotos sin gastar papel</sub></td>
-  </tr>
-</table>
+<p align="center"><a href="#cómo-usarla">Cómo usarla</a> · <a href="#qué-puedes-hacer">Qué puedes hacer</a> · <a href="#consejos-y-problemas-frecuentes">Problemas frecuentes</a> · <a href="#seguridad-y-privacidad">Privacidad</a> · <a href="#para-desarrolladores">Desarrolladores</a> · <a href="README.en.md">English</a></p>
+
+<p align="center"><img src="docs/fotos/pm270-alialab.jpg" alt="Impresora PM270 imprimiendo una etiqueta diseñada con la app" width="520"></p>
 
 > **Proyecto independiente.** Esta app no está hecha, afiliada, patrocinada ni respaldada por Nelko. «Nelko» y «PM270» se citan solo para indicar con qué impresora funciona. No incluye logos, código ni archivos de la app oficial: la comunicación con la impresora se ha escrito desde cero, probando con una impresora propia.
 
@@ -33,17 +28,6 @@ Detrás de ALIALAB hay una persona con ideas e inquietudes, no un equipo de prog
 
 Lo comparto como software libre por si a alguien más le sirve. Si encuentras un fallo o tienes una idea, abre una *issue*: la leo con gusto.
 
-## Qué hace
-
-- **Texto, sellos y fotos** que se arrastran y se amplían (con el ratón o pellizcando en el móvil).
-- **Fotos ajustadas para papel térmico**: niveles, brillo, contraste, nitidez y tramado. Incluye una **etiqueta de prueba** con 12 muestras para ver cómo afecta cada ajuste antes de gastar papel.
-- **Tipos de papel**: etiquetas de varios tamaños, redondas y rollo continuo. Los rollos con chip se detectan solos. **Mis papeles** guarda los que tienes comprados.
-- **Listas con casillas** (`# Título`, una línea por elemento, `x` delante para tacharlo) y **texto girado** 90°/180°/270°.
-- **Fechas automáticas**: `{hoy}`, `{hoy+7}`, `{dia}`, `{mes}`, `{año}`, `{hora}`.
-- **Galería**: plantillas (tarro, congelador, caducidad, regalo, medicación, Wi-Fi…), 26 marcos con tamaño ajustable, calendarios, pasatiempos (crucigramas, sopas de letras, laberintos), dibujos para colorear, **códigos QR** y **de barras** (Code 128, EAN-13) y **Mis diseños**.
-- **Mural**: divide una imagen grande en varias etiquetas numeradas para pegarlas juntas.
-- **Varias copias** (1–99) y comprobación de papel y tapa antes de imprimir, para no desperdiciar etiquetas.
-- Guía **¿Qué papel compro?**: papel térmico **sin fenoles (libre de BPA y BPS)**.
 
 ## Cómo usarla
 
@@ -63,6 +47,67 @@ La APK lleva dentro la misma app que la web: funciona sin internet. Solo pide el
 4. Si quieres, pulsa **Instalar app** para tener un acceso en el escritorio que funciona también sin internet.
 
 Sin conexión a internet también puedes descargar el proyecto (**Code → Download ZIP**) y hacer doble clic en `web/abrir_etiquetas.bat` (necesita Python 3): abre la app en `http://localhost:8000`.
+
+## Qué puedes hacer
+
+Todo esto sale de la galería de la app con un toque, y luego lo cambias a tu gusto. Estas imágenes son exactamente lo que se imprime.
+
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="docs/ejemplos/tarro.png" alt="Tarros de cocina con la fecha de hoy" width="260"><br><sub>Tarros de cocina con la fecha de hoy</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/congelador.png" alt="Congelador: raciones y caducidad" width="260"><br><sub>Congelador: raciones y caducidad</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/compra.png" alt="Listas con casillas" width="260"><br><sub>Listas con casillas</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><img src="docs/ejemplos/qr.png" alt="Códigos QR y de barras" width="260"><br><sub>Códigos QR y de barras</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/mudanza.png" alt="Cajas de mudanza" width="260"><br><sub>Cajas de mudanza</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/calendario.png" alt="Calendarios del mes" width="260"><br><sub>Calendarios del mes</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><img src="docs/ejemplos/sopa.png" alt="Sopas de letras y crucigramas" width="260"><br><sub>Sopas de letras y crucigramas</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/laberinto.png" alt="Laberintos" width="260"><br><sub>Laberintos</sub></td>
+    <td align="center" width="33%"><img src="docs/ejemplos/colorear.png" alt="Dibujos para colorear" width="260"><br><sub>Dibujos para colorear</sub></td>
+  </tr>
+</table>
+
+<details>
+<summary><b>Todas las funciones</b></summary>
+
+- **Texto, sellos y fotos** que se arrastran y se amplían (con el ratón o pellizcando en el móvil).
+- **Fotos ajustadas para papel térmico**: niveles, brillo, contraste, nitidez y tramado. Incluye una **etiqueta de prueba** con 12 muestras para ver cómo afecta cada ajuste antes de gastar papel.
+- **Tipos de papel**: etiquetas de varios tamaños, redondas y rollo continuo. Los rollos con chip se detectan solos. **Mis papeles** guarda los que tienes comprados.
+- **Listas con casillas** (`# Título`, una línea por elemento, `x` delante para tacharlo) y **texto girado** 90°/180°/270°.
+- **Fechas automáticas**: `{hoy}`, `{hoy+7}`, `{dia}`, `{mes}`, `{año}`, `{hora}`.
+- **Galería**: plantillas (tarro, congelador, caducidad, regalo, medicación, Wi-Fi…), 26 marcos con tamaño ajustable, calendarios, pasatiempos (crucigramas, sopas de letras, laberintos), dibujos para colorear, **códigos QR** y **de barras** (Code 128, EAN-13) y **Mis diseños**.
+- **Mural**: divide una imagen grande en varias etiquetas numeradas para pegarlas juntas.
+- **Varias copias** (1–99) y comprobación de papel y tapa antes de imprimir, para no desperdiciar etiquetas.
+- Guía **¿Qué papel compro?**: papel térmico **sin fenoles (libre de BPA y BPS)**.
+
+</details>
+
+## Así es la app
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/capturas/movil.png" alt="La app en un móvil Android" width="200"><br><sub>En el móvil</sub></td>
+    <td align="center"><img src="docs/capturas/escritorio.png" alt="La app en el PC: texto, marco y vista previa" width="560"><br><sub>En el PC</sub><br><br>
+    <img src="docs/capturas/galeria.png" alt="Galería de pasatiempos" width="560"><br><sub>Galería: plantillas, marcos, pasatiempos, colorear, QR…</sub></td>
+  </tr>
+</table>
+
+## Consejos y problemas frecuentes
+
+<img src="docs/fotos/pm270-prueba.jpg" alt="Etiqueta de prueba impresa en la PM270" width="300" align="right">
+
+- **No aparece la impresora.** Comprueba que está encendida y emparejada (en el PC, en Configuración → Bluetooth; en el móvil, en Ajustes → Bluetooth). Solo admite una conexión a la vez: desconéctala del móvil, de la app oficial o de otra pestaña antes de conectar.
+- **En Android no la encuentra.** Acepta el permiso de **dispositivos cercanos** la primera vez. Si lo denegaste, actívalo en Ajustes → Aplicaciones → Etiquetas PM270 → Permisos.
+- **Se ha perdido la conexión.** La app intenta reconectar sola. Si no lo consigue, apaga y enciende la impresora y pulsa **Conectar impresora**.
+- **Sale muy clara o muy oscura.** Sube o baja la **Intensidad** en el panel Papel. Para fotos, imprime la **Etiqueta de prueba** (foto de la derecha): en una sola etiqueta ves 12 combinaciones de modo, brillo y contraste y eliges la que mejor queda.
+- **Avisa de que no hay papel o la tapa está abierta.** La impresora da el mismo aviso en los dos casos: revisa ambas cosas.
+- **Has rellenado el cartucho con otro papel.** Activa en Ajustes «Mi cartucho está rellenado», para que la app no use el tamaño que dice el chip del rollo.
+- **Se corta un poco por los lados.** La impresora pierde unos 2 mm en cada borde lateral; deja ese margen en tus diseños.
+
+<br clear="right">
 
 ## Seguridad y privacidad
 
